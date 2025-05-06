@@ -1,0 +1,18 @@
+# Fichiers temporaires
+[Tt]emp/
+[Ll]ibrary/
+[Ll]ogs/
+obj/
+Build/
+Builds/
+[Dd]ebug/
+[Dd]ebugPublic/
+[M]emoryCaptures/
+.vscode/
+
+# Fichiers spécifiques aux systèmes d'exploitation
+.DS_Store
+Thumbs.db
+
+# Fichiers spécifiques à Unity
+sysinfo.txt
