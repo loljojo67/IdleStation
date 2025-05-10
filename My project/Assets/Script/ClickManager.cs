@@ -57,4 +57,11 @@ public class ClickManager : MonoBehaviour
     public void Ajout(){
         argent += (int)math.floor(tauxDeClique);
     }
+
+    public void Achat(int prix, float multiplicateur){
+        if(argent >= prix){
+            argent -= prix;
+            tauxDeClique *= multiplicateur;
+        }
+    }
 }

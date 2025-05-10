@@ -65,8 +65,9 @@
     <Analyzer Include="D:\6000.0.44f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ClickManager.cs" />
-    <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\ScriptableObject\Upgrade.cs" />
+    <Compile Include="Assets\Script\ClickManager.cs" />
+    <Compile Include="Assets\Script\UpgradeManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
