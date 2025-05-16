@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26e2f0dc1f2c73448c7ba038c5d6da1, type: 3}
   m_Name: Upgrade1
   m_EditorClassIdentifier: 
-  nom: 
-  description: 
+  nom: Caca
+  description: Plus de caca
   type: 0
-  bonus: 0
-  prixBase: 0
-  multiplicateur: 0
+  bonus: 1.1
+  prixBase: 7
+  multiplicateur: 1.2

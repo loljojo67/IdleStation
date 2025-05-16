@@ -12,6 +12,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] TMP_Text nom;
     [SerializeField] TMP_Text desc;
 
+
     void Start()
     {
         prix.text = upgrade.prixBase.ToString();
