@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using TMPro;
 using Unity.VisualScripting;
@@ -5,22 +6,27 @@ using UnityEngine;
 
 public class UpgradeManager : MonoBehaviour
 {
-    public Upgrade upgrade;
+    [SerializeField] List<Upgrade> upgrade = new List<Upgrade>();
+
     [SerializeField] ClickManager cm;
 
     [SerializeField] TMP_Text prix;
     [SerializeField] TMP_Text nom;
     [SerializeField] TMP_Text desc;
 
+    public List<Upgrade> Upgrade;
+    [SerializeField] bool upgarder = false;
 
-    void Start()
-    {
-        prix.text = upgrade.prixBase.ToString();
-        nom.text = upgrade.nom;
-        desc.text = upgrade.description;
-    }
+    
 
     public void UpgradeAchat(){
-        cm.Achat(upgrade.prixBase, upgrade.multiplicateur);
+        for (int i = 0; i < upgrade.Count; i++ ){
+            if (upgarder == true){
+
+            }
+
+            cm.Achat(upgrade.prixBase, Upgrade.multiplicateur);
+        }
+
     }
 }
