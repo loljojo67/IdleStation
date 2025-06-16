@@ -14,12 +14,11 @@ public class ClickManager : MonoBehaviour
     public int prixClique = 1;
     public double tauxDeClique = 1;
     public int argent = 0;
-    [SerializeField] int lieuDeProduction = 1;
 
     public float delay = 1;
     void Start()
     {
-        Charger();
+        /*Charger();*/
         InvokeRepeating("Idle", 1f, delay);
     }
 
@@ -72,7 +71,7 @@ public class ClickManager : MonoBehaviour
 
 
     /*Sauvegarde/Charge*/
-
+/*
     public void Sauvegarder()
     {
         PlayerPrefs.SetString("argent", argent.ToString());
@@ -95,11 +94,5 @@ public class ClickManager : MonoBehaviour
     void OnApplicationQuit()
     {
         Sauvegarder();
-    }
-
-    //Porgression
-    public void GenrateurData()
-    {
-        
-    }
+    }*/
 }

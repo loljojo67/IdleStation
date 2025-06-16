@@ -1323,7 +1323,7 @@ GameObject:
   - component: {fileID: 1339074577}
   - component: {fileID: 1339074578}
   m_Layer: 0
-  m_Name: Idle
+  m_Name: Clicker Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1364,7 +1364,6 @@ MonoBehaviour:
   prixClique: 1
   tauxDeClique: 1
   argent: 0
-  lieuDeProduction: 5
   delay: 1
 --- !u!1 &1347346479
 GameObject:
