@@ -666,11 +666,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d30589269c7c364ba9d76f570214065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgrade: {fileID: 11400000, guid: 4acbc1a0641d4e54a877d3c5bffb7656, type: 2}
+  upgrade:
+  - {fileID: 11400000, guid: 4acbc1a0641d4e54a877d3c5bffb7656, type: 2}
+  - {fileID: 11400000, guid: 917a9a4d07bae104f99b0d0729818117, type: 2}
+  - {fileID: 11400000, guid: 568780a91d679a247bfb05986938a089, type: 2}
   cm: {fileID: 1339074578}
   prix: {fileID: 1393170824}
   nom: {fileID: 1469451622}
   desc: {fileID: 1100036539}
+  i: 0
 --- !u!114 &661361113
 MonoBehaviour:
   m_ObjectHideFlags: 0
