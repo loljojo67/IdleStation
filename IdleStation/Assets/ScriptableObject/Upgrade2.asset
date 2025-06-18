@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b26e2f0dc1f2c73448c7ba038c5d6da1, type: 3}
-  m_Name: Upgrade
+  m_Name: Upgrade2
   m_EditorClassIdentifier: 
   nom: 4156
   description: ' def'
   type: 0
   bonus: 15
-  prixBase: 17
-  multiplicateur: 1.1
+  prixBase: 0
+  multiplicateur: 1.2

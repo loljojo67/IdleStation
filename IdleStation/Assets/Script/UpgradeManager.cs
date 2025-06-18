@@ -2,65 +2,67 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeManager : MonoBehaviour
 {
-    [SerializeField] List<Upgrade> upgrade = new List<Upgrade>();
-    [SerializeField] ClickManager cm;
+    public ClickManager cm;
+    public List<Upgrade> upgrade = new List<Upgrade>();
 
-    [SerializeField] TMP_Text prix;
     [SerializeField] TMP_Text nom;
     [SerializeField] TMP_Text desc;
+    [SerializeField] TMP_Text prix_txt;
 
-    [SerializeField] int i = 0; // index de l'upgrade actuel
+    [SerializeField] float multiplicateur = 1;
 
-    private void Start()
+    [SerializeField] private int i = 0;
+    float prix;
+    float multPrix = 1.5f;
+
+    void Start()
     {
-        AfficherUpgrade();
+        nom.text = upgrade[i].nom;
+        desc.text = upgrade[i].description;
+        prix_txt.text = upgrade[i].prixBase.ToString();
+        multiplicateur = upgrade[i].multiplicateur;
     }
 
-    public void UpgradeAchat()
+    void UpdateUpgrade()
     {
-        if (i >= upgrade.Count || upgrade[i].nom == "Fini")
+        multiplicateur *= upgrade[i].multiplicateur;
+        multiplicateur = MathF.Round(multiplicateur);
+        prix = upgrade[0].prixBase * MathF.Pow(multPrix, i);
+        prix = Mathf.Round(prix);
+    }
+
+    void TextUpdate()
+    {
+        nom.text = upgrade[i].nom;
+        desc.text = upgrade[i].description;
+        prix_txt.text = prix.ToString();
+        multiplicateur = upgrade[i].multiplicateur;
+    }
+    public void Upgrade()
+    {
+        if (cm.argent >= upgrade[i].prixBase)
         {
-             return;
-        }
 
-        float prixActuel = CalculerPrix(upgrade[i], i);
+            cm.Achat(upgrade[i].prixBase, multiplicateur);
+            i++;
+            if (upgrade[i].nom == "Fini")
+            {
+                gameObject.GetComponent<Button>().interactable = false;
+                prix_txt.gameObject.SetActive(false);
+            }
+            UpdateUpgrade();
+            TextUpdate();
 
-        if (cm.argent >= prixActuel)
-        {
-            cm.argent -= Convert.ToInt32(prixActuel);
-            cm.Achat(upgrade[i].prixBase, upgrade[i].multiplicateur);
-
-            i++; // passe à l’upgrade suivante
-            if (i < upgrade.Count)
-                AfficherUpgrade();
         }
         else
         {
-            Debug.Log("Pas assez d'argent !");
+            Debug.Log("Pas assez d'argent");
         }
     }
 
-    private float CalculerPrix(Upgrade upgrade, int niveau)
-    {
-        return upgrade.prixBase * Mathf.Pow(upgrade.multiplicateur, niveau);
-    }
 
-    private void AfficherUpgrade()
-    {
-        if (i >= upgrade.Count || upgrade[i].nom == "Fini")
-        {
-            prix.text = "Fini";
-            nom.text = "Tous les upgrades sont débloqués !";
-            desc.text = "";
-            return;
-        }
-
-        float prixActuel = CalculerPrix(upgrade[i], i);
-        prix.text = Mathf.RoundToInt(prixActuel).ToString();
-        nom.text = upgrade[i].nom;
-        desc.text = upgrade[i].description;
-    }
 }

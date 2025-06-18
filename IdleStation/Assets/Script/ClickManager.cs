@@ -5,15 +5,11 @@ using UnityEngine;
 
 public class ClickManager : MonoBehaviour
 {
-    [SerializeField] TMP_Text argent_conteur;
-    [SerializeField] TMP_Text idleBonusTxt;
-    [SerializeField] TMP_Text cliqueBonusText;
-
-    public int prixProduction = 1;
-    public double tauxDeProduction = 1;
-    public int prixClique = 1;
-    public double tauxDeClique = 1;
+    [SerializeField] TMP_Text Argent_TXT;
     public int argent = 0;
+
+    public double tauxIdle = 1;
+    public double tauxClick = 1;
 
     public float delay = 1;
     void Start()
@@ -24,40 +20,18 @@ public class ClickManager : MonoBehaviour
 
     void Update()
     {
-
-        argent_conteur.text = math.floor(argent).ToString();
-        idleBonusTxt.text = prixProduction.ToString();
-        cliqueBonusText.text = prixClique.ToString();
+        Argent_TXT.text = math.floor(argent).ToString();
     }
 
-    public void IdleBonus()
-    {
-        if (argent >= prixProduction)
-        {
-            argent -= prixProduction;
-            tauxDeProduction *= 1.5f;
-            prixProduction *= 2;
-        }
-    }
-
-    public void CliqueBonus()
-    {
-        if (argent >= prixClique)
-        {
-            argent -= prixClique;
-            tauxDeClique *= 1.5f;
-            prixClique *= 2;
-        }
-    }
 
     public void Idle()
     {
-        argent += (int)math.floor(tauxDeProduction);
+        argent += (int)math.floor(tauxIdle);
     }
 
-    public void Ajout()
+    public void Click()
     {
-        argent += (int)math.floor(tauxDeClique);
+        argent += (int)math.floor(tauxClick);
     }
 
     public void Achat(int prix, float multiplicateur)
@@ -65,7 +39,7 @@ public class ClickManager : MonoBehaviour
         if (argent >= prix)
         {
             argent -= prix;
-            tauxDeClique *= multiplicateur;
+            tauxClick *= multiplicateur;
         }
     }
 
