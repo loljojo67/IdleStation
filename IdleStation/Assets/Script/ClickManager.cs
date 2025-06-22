@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
@@ -6,35 +8,53 @@ using UnityEngine;
 public class ClickManager : MonoBehaviour
 {
     [SerializeField] TMP_Text Argent_TXT;
+    [SerializeField] TMP_Text Idle_TXT;
     public int argent = 0;
-
+    public float idle;
     public double tauxIdle = 1;
     public double tauxClick = 1;
 
-    public float delay = 1;
+    [SerializeField] public float delay = 1f;
+
+    private Coroutine idleCoroutine;
     void Start()
     {
+        idleCoroutine = StartCoroutine(IdleLoop());
         /*Charger();*/
-        InvokeRepeating("Idle", 1f, delay);
-    }
-
-    void Update()
-    {
-        Argent_TXT.text = math.floor(argent).ToString();
-    }
-
-
-    public void Idle()
-    {
-        argent += (int)math.floor(tauxIdle);
     }
 
     public void Click()
     {
         argent += (int)math.floor(tauxClick);
     }
+    IEnumerator IdleLoop()
+    {
+        while (true)
+        {
+            argent += (int)math.floor(tauxIdle);
+            yield return new WaitForSeconds(delay);
+        }
+    }
 
-    public void Achat(int prix, float multiplicateur)
+    public void ChangerDelay(float nouveauDelay)
+    {
+        delay = nouveauDelay;
+
+        if (idleCoroutine != null)
+        {
+            StopCoroutine(idleCoroutine);
+            idleCoroutine = StartCoroutine(IdleLoop());
+        }
+    }
+
+    void Update()
+    {
+        idle = (float)tauxIdle;
+        Idle_TXT.text = Math.Round(idle, 3).ToString() + "/s";
+        Argent_TXT.text = math.floor(argent).ToString();
+    }
+
+    public void AchatClique(int prix, float multiplicateur)
     {
         if (argent >= prix)
         {
@@ -43,9 +63,19 @@ public class ClickManager : MonoBehaviour
         }
     }
 
+    public void AchatIdle(int prix, float multiplicateur)
+    {
+        if (argent >= prix)
+        {
+            argent -= prix;
+            tauxIdle *= multiplicateur;
+        }
+    }
 
-    /*Sauvegarde/Charge*/
-/*
+
+
+    /*Sauvegarde Charge*/
+    /*
     public void Sauvegarder()
     {
         PlayerPrefs.SetString("argent", argent.ToString());

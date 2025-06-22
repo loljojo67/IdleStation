@@ -12,7 +12,6 @@ public class Upgrade : ScriptableObject
     public string nom;
     public string description;
     public TypeUpgrade type;
-    public double bonus;
     public int prixBase;
     public float multiplicateur;
 }

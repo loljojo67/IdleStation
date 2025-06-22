@@ -13,8 +13,6 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] TMP_Text desc;
     [SerializeField] TMP_Text prix_txt;
 
-    [SerializeField] float multiplicateur = 1;
-
     [SerializeField] private int i = 0;
     float prix;
     float multPrix = 1.5f;
@@ -24,13 +22,11 @@ public class UpgradeManager : MonoBehaviour
         nom.text = upgrade[i].nom;
         desc.text = upgrade[i].description;
         prix_txt.text = upgrade[i].prixBase.ToString();
-        multiplicateur = upgrade[i].multiplicateur;
+
     }
 
     void UpdateUpgrade()
     {
-        multiplicateur *= upgrade[i].multiplicateur;
-        multiplicateur = MathF.Round(multiplicateur);
         prix = upgrade[0].prixBase * MathF.Pow(multPrix, i);
         prix = Mathf.Round(prix);
     }
@@ -40,29 +36,33 @@ public class UpgradeManager : MonoBehaviour
         nom.text = upgrade[i].nom;
         desc.text = upgrade[i].description;
         prix_txt.text = prix.ToString();
-        multiplicateur = upgrade[i].multiplicateur;
     }
-    public void Upgrade()
+    public void Upgrades()
     {
         if (cm.argent >= upgrade[i].prixBase)
         {
-
-            cm.Achat(upgrade[i].prixBase, multiplicateur);
+            
+            if(upgrade[i].type == Upgrade.TypeUpgrade.Clique)
+            {
+                cm.AchatClique(upgrade[i].prixBase, upgrade[i].multiplicateur);
+            }
+            if (upgrade[i].type == Upgrade.TypeUpgrade.Idle)
+            {
+                cm.AchatIdle(upgrade[i].prixBase, upgrade[i].multiplicateur);
+            }
             i++;
             if (upgrade[i].nom == "Fini")
             {
                 gameObject.GetComponent<Button>().interactable = false;
                 prix_txt.gameObject.SetActive(false);
+                return;
             }
             UpdateUpgrade();
             TextUpdate();
-
         }
         else
         {
             Debug.Log("Pas assez d'argent");
         }
     }
-
-
 }
